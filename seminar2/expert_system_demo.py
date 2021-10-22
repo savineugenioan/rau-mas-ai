@@ -47,7 +47,7 @@ class Agent:
                     break
                 else:
                     print("--Bummer! I couldn't do anything... I'm trying a new move...")
-                    self.tried_rules.append(rule)
+                    self.tried_rules.append(rule_index)
 
     def validate_rule(self, rule):
         antecedent_ok = True

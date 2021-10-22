@@ -1,3 +1,5 @@
+# IF () THEN ()
+# IF direction = left THEN position = (-1, 0)
 class RuleAntecedent:
     def __init__(self, direction=None, world=None):
         self.direction = direction  # up, down, left, right
@@ -14,11 +16,6 @@ class Rule:
     def __init__(self, antecedent, consequent):
         self.antecedent = antecedent
         self.consequent = consequent
-
-# 0, 0, 0, 0
-# 0, 0, 0, 0
-# 0, 0, 0, 0
-# 0, 0, 0, 0
 
 
 M = 30
