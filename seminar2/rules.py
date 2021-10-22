@@ -1,5 +1,5 @@
 class RuleAntecedent:
-    def __init__(self, direction, world):
+    def __init__(self, direction=None, world=None):
         self.direction = direction  # up, down, left, right
         self.world = world  # (-1, 0, 0) (-1, 0, 1)
 
@@ -15,6 +15,14 @@ class Rule:
         self.antecedent = antecedent
         self.consequent = consequent
 
+# 0, 0, 0, 0
+# 0, 0, 0, 0
+# 0, 0, 0, 0
+# 0, 0, 0, 0
+
+
+M = 30
+N = 30
 
 RULES = [
     Rule(
@@ -32,5 +40,21 @@ RULES = [
     Rule(
         RuleAntecedent(direction="up", world=(0, -1, 1)),
         RuleConsequent(position=None, direction="right")
+    ),
+    Rule(
+        RuleAntecedent(direction="right", world=(1, 0, 0)),
+        RuleConsequent(position=(1, 0), direction=None)
+    ),
+    Rule(
+        RuleAntecedent(direction="right", world=(1, 0, 1)),
+        RuleConsequent(position=None, direction="down")
+    ),
+    Rule(
+        RuleAntecedent(direction="down", world=(0, 1, 0)),
+        RuleConsequent(position=(0, 1), direction=None)
+    ),
+    Rule(
+        RuleAntecedent(direction="down", world=(0, 1, 1)),
+        RuleConsequent(position=None, direction="left")
     )
 ]

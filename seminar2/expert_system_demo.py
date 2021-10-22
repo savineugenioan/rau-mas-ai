@@ -1,8 +1,7 @@
 import numpy as np
-from rules import RULES
+from rules import RULES, M, N
 
 class World:
-
     def __init__(self, n, m):
         self.world = np.zeros((n, m))
 
@@ -10,7 +9,6 @@ class World:
         self.world[x:x+dx, y:y+dy] = 1
 
 class Agent:
-
     def __init__(self, world, rules=None):
         self.world = world
         self.rules = rules
@@ -53,9 +51,24 @@ class Agent:
 
     def validate_rule(self, rule):
         antecedent_ok = True
-        if self.direction != rule.antecedent.direction or \
+        current_position_x = self.current_position[0]
+        current_position_y = self.current_position[1]
+        if rule.antecedent.world[0] < 0 and current_position_x + rule.antecedent.world[0] >= 0:
+            if self.direction != rule.antecedent.direction or \
                 self.world.world[self.current_position[0] + rule.antecedent.world[0], self.current_position[1] + rule.antecedent.world[1]] != rule.antecedent.world[2]:
-            antecedent_ok = False
+                    antecedent_ok = False
+        elif rule.antecedent.world[0] > 0 and current_position_x + rule.antecedent.world[0] < M:
+            if self.direction != rule.antecedent.direction or \
+                self.world.world[self.current_position[0] + rule.antecedent.world[0], self.current_position[1] + rule.antecedent.world[1]] != rule.antecedent.world[2]:
+                    antecedent_ok = False
+        elif rule.antecedent.world[1] < 0 and current_position_y + rule.antecedent.world[1] >= 0:
+            if self.direction != rule.antecedent.direction or \
+                self.world.world[self.current_position[0] + rule.antecedent.world[0], self.current_position[1] + rule.antecedent.world[1]] != rule.antecedent.world[2]:
+                    antecedent_ok = False
+        elif rule.antecedent.world[1] > 0 and current_position_y + rule.antecedent.world[1] < N:
+            if self.direction != rule.antecedent.direction or \
+                self.world.world[self.current_position[0] + rule.antecedent.world[0], self.current_position[1] + rule.antecedent.world[1]] != rule.antecedent.world[2]:
+                    antecedent_ok = False
         return antecedent_ok
 
     def apply_consequent(self, rule):
@@ -70,8 +83,7 @@ class Agent:
 
 
 if __name__ == "__main__":
-
-    world_size = (30, 30)
+    world_size = (N, M)
     world = World(*world_size)
     world.add_obstacle(10, 10, 4, 4)
     agent = Agent(world, RULES)
