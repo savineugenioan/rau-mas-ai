@@ -10,3 +10,16 @@ reg = reg.fit(X, y)
 X_new = [[1, 1.2]]
 y_new = reg.predict(X_new)
 print(f"Predicted value for {X_new} is {y_new}")
+
+from sklearn.tree import DecisionTreeClassifier
+
+X = np.asarray([[1.1,1.23], [2.2,1.34], [5.6,3.2], [1.6,4.3], [1.9,3.2], [3.4,2.1]])
+y = [1, 1, 2, 2, 1, 2]
+
+clf = DecisionTreeClassifier()
+clf = clf.fit(X, y)
+
+X_new = [[1, 1.2], [3, 2]]
+y_new = clf.predict(X_new)
+print(f"Predicted value for {X_new} is {y_new}")
+
